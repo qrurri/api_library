@@ -1,0 +1,344 @@
+/*Google font link */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+/* Reset Style */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 이 태그는 마진과 패딩을 박스 바깥쪽이 아닌, 안쪽으로 넣는 명령어이다. */
+  /* border-box: 패딩과 선이 요소 안쪽으로 들어가서 생성된다. */
+}
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--color-dark);
+  color: var(--color-bright);
+  /* a태그는 기본적으로 이 상속 못 받음 */
+}
+
+a {
+  /* 따라서 a태그의 상속값은 별도로 지정하여야 한다. */
+  color: inherit;
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+em,
+i,
+strong,
+b {
+  /* 강조 표시한 것들은 모두 다시 원상태로 복귀 */
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* root style */
+:root {
+  --color-dark: rgb(34, 36, 41);
+  --color-border: rgb(92, 96, 105);
+  --color-bright: rgb(224, 228, 228);
+  --color-loading: #2a2826;
+}
+
+input {
+  border: 1px solid var(--color-border);
+  background: var(--color-dark);
+  color: inherit;
+  font-family: inherit; /* 폰트도 상속받으라고 별도로 지정해줬음. */
+  outline: none; /* 활성화되어도 border이 파랗게 변하지 않음 */
+}
+
+input::placeholder {
+  color: var(--color-border);
+}
+
+/* Common Style */
+.container {
+  width: 100%;
+  max-width: 580px; /*최대 너비값 지정 */
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  margin: auto;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative; /* absolute 태그의 기준을 부모 요소로 잡게끔 설정함. */
+}
+
+/*Header Style */
+header {
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+header h2 {
+  padding: 0.75rem 0;
+}
+
+section > .container {
+  padding: 0.25rem;
+  position: relative; /* 이걸 relative로 두어야 이 안에 있는 absolute 요소가 부모 영향 아래 있다. */
+}
+
+section > .container > .loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 998;
+  background: var(--color-loading);
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+section > .container > .loading.on {
+  /* . 사이에 띄어쓰기 안 띄고 붙이면 클래스가 동시에 2개 속하는 것임. */
+  display: flex;
+}
+
+section > .container > .loading img {
+  width: 50%;
+}
+
+section > .container > .search-bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(
+    -50%
+  ); /* X축 기준 50%만큼 반대로 이동 -> 오른쪽으로 절반 이동 */
+  margin-top: 30px;
+  background: #212121;
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  column-gap: 4px;
+  border-radius: 8px;
+  z-index: 999;
+}
+
+section > .container > .search-bar input {
+  width: 90%;
+  padding: 0.25 rem 0.5 rem;
+}
+
+section > .container > .search-bar button {
+  width: 10%;
+  padding: 0.25rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section > .container > .map-wrapper {
+  overflow: hidden; /*사진이 요소 밖으로 넘쳐서 나오는 것을 자르는 명령어 */
+  height: 100vh;
+}
+
+section > .container > .map-wrapper img {
+  height: 100%;
+  width: 100%;
+}
+
+/* Bottom Bar Style */
+.bottom-bar {
+  position: absolute;
+  width: 100%;
+  background: var(--color-dark);
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.bottom-bar .container {
+  display: flex;
+  padding: 1.25rem;
+}
+
+.bottom-bar .container > div {
+  width: 33.33%;
+  text-align: center;
+  border-right: 1px solid var(--color-border);
+}
+.bottom-bar .container > div:last-child {
+  /*마지막 자식 부분에만 태그 별도 주기 ~*/
+  border-right: 0px;
+}
+
+/* Detail Box Style */
+.details {
+  width: 90%;
+  height: auto;
+  background: var(--color-dark);
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  z-index: 999;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  padding: 12px;
+  display: none; /*이렇게 해서 창이 안 보이게끔 한다 ! 보이게 하는건 javascript 쓴다. */
+}
+
+.details > .title {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.details .title h2 {
+  font-size: 18px;
+  font-weight: normal;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.details .title h2:after {
+  /* 가상요소는 콜론(:) 뒤에 나오는 속성으로, 선택한 요소의 지정된 부분에 별도 스타일을 입힐 수 있다. 여기의 after는 '뒤쪽'이란 뜻 */
+  content: ''; /* 가상요소는 content 속성이 있어야 생성된다. - 필수속성! */
+  position: absolute;
+  width: 100%; /*h2를 부모로 가지므로 width를 100%로 하면 h2의 너비만큼 밑줄이 생성된다. */
+  height: 1px;
+  background-color: #ffffff;
+  left: 0;
+  bottom: 0;
+  margin-bottom: -0.5rem;
+}
+
+.details > .title i {
+  position: absolute; /* absolute 요소는 flex 아이템 적용이 안 된다. */
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  cursor: pointer; /* 커서가 손가락으로 바뀜 */
+}
+
+.details .boxinfo {
+  display: flex;
+  column-gap: 0.7rem;
+  margin: 0.75rem 0 1.55rem;
+}
+
+.details .boxinfo > div {
+  /* 따흐흑... red 1, 2, 3, blue 이렇게 나눌 필요 없이 그냥 속성값인 div로만 주면 되는구나 ㅠㅠ */
+  border: 1px solid #fff;
+  width: 25%;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+.details .boxinfo > div > h3:nth-child(2) {
+  /*h3의 첫번째 자식의 after 부분에 넣어라 */
+  width: 100%;
+  background: #fff;
+  display: block; /*요소를 블럭처리하는 태그로서 전후 줄바꿈이 들어가 다른 태그를 밀어내고 혼자 한 줄을 차지하게 함. */
+  color: #212121;
+}
+
+.details .boxinfo > div > h3 {
+  padding: 0.25rem 0;
+}
+
+.details .letterinfo > div {
+  margin-bottom: 0.75rem;
+  display: flex;
+}
+
+.details .letterinfo > div > .info-title {
+  /* div 아래 모든 class에 동일 적용하는 방법 */
+  width: 30%;
+}
+
+.details .link {
+  /*link는 div 밑에 있는게 아니고 details 부분 클래스의 자식 클래스로 direct하게 속해있음! */
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.details .link a {
+  border: 1px solid #fff;
+  padding: 0.25rem 1.25rem;
+  border-radius: 0.75rem;
+  transition: all 0.4s;
+}
+
+.details .link a:hover {
+  background: #fff;
+  color: #212121;
+}
+
+/* 아래로 죄다 내가 한 거 */
+/* .details > .info > .boxinfo { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 중요 정보 스타일 */
+/* .details .boxinfo {
+  /* display: flex; /* Flexbox를 사용하여 가로 정렬 
+  justify-content: center; /* 가운데 정렬 
+  align-items: center; /* 수직 가운데 정렬 
+  text-align: center;
+}
+.details .boxinfo h3 {
+  margin: 0 10px;
+}
+
+.info {
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.red1,
+.red2,
+.red3,
+.blue {
+  display: inline-block; /* 인라인 요소로 배치 
+  padding: 5px 10px; /* 내부 여백 
+  border-radius: 10px; /* 둥근 모서리 
+  background-color: #ec407a; /* 빨간색 배경 
+  color: black; /* 검은색 글자색 
+  margin-right: 10px; /* 오른쪽 여백 
+  margin-bottom: 10px; /* 아래 여백 */
+/* } */
+
+/* 도서와 도서 수량 간의 흰색 선 스타일 
+.details .boxinfo .red1 .line,
+.details .boxinfo .red2 .line,
+.details .boxinfo .red3 .line,
+.details .boxinfo .blue .line {
+  height: 1px; /* 선의 높이 
+  background-color: black; /* 선의 색상 
+  flex-grow: 1; /* 자동으로 남은 공간을 차지 
+  margin: 0 10px; /* 좌우 여백 */
+/* }  */
+
+/* .blue { 
+display: inline-block; /* 인라인 요소로 배치 */
+/* padding: 5px 10px; /* 내부 여백 
+  border-radius: 10px; /* 둥근 모서리 
+  background-color: #5c6bc0; /* 파란색 배경 
+  color: black; /* 검은색 글자색 
+  margin-right: 10px; /* 오른쪽 여백 
+  margin-bottom: 10px; /* 아래 여백 
+}
+
+/* 운영시간, 연락처, 주소 스타일 
+.info-contents p {
+  margin: 0; /* 마진 초기화 
+}
+
+.link {
+  text-align: center; /* 텍스트 가운데 정렬 
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.link a {
+  text-decoration: underline; /* 밑줄 추가 
+} */

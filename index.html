@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Library</title>
+
+  <!-- Remix Icon Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css" integrity="sha512-MqL4+Io386IOPMKKyplKII0pVW5e+kb+PI/I3N87G3fHIfrgNNsRpzIXEi+0MQC0sR9xZNqZqCYVcC61fL5+Vg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rxo5ocfeo2"></script>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="container">
+        <h1>Search Libraries</h1></header>
+        <section>
+          <div class="container">
+            <div class="loading"><img src="loading.gif" alt="loading indicator"></div>
+            <div class="search-bar">
+              <input type="text" placeholder="지역명 또는 도서관 이름을 입력하세요.">
+              <button><i class="ri-search-line"></i></button>
+            </div>
+            <div class="map-wrapper" id="map">
+              <img src="temp_image3 .png" alt="naver map">
+            </div>
+
+            <div class="details">
+            <!-- 자바스크립트를 통한 동적 요소 생성 공간 -->
+            </div> 
+          </div>
+          </div>
+        </section>
+
+        <div class="bottom-bar">
+          <div class="container">
+            <div>
+              <a href="#">
+                <span><i class="ri-price-tag-3-line"></i></span>
+              <em>리뷰</em>
+              </a>
+            </div>
+            <div>
+              <a href="#">
+                <span><i class="ri-user-3-line"></i></span>
+              <em>내 도서관</em>
+              </a>
+              </div>
+              <div>
+                <a href="#">
+                  <span><i class="ri-add-circle-line"></i></span>
+                  <em>탐색</em>
+                </a>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <script src="js/data.js"></script>
+  <script src="js/custom.js"></script>
+</body>
+</html>
